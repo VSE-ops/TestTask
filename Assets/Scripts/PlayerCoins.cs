@@ -1,35 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using System.Linq;
+using UnityEngine;
 
 public class PlayerCoins : MonoBehaviour
 {
-    //coin amount and text field objects 
-    [SerializeField] private int playerCoinsAmount = 30;
+    [SerializeField] private int playerCoinsAmountDefault = 30;
+    private int playerCurrentCoinsAmount;
     [SerializeField] private TMP_Text playerCoinsTextObject;
 
-    //point in scene where to instantiate coins
-    [SerializeField] GameObject spawnPointGameObject;
-    //Coin prefab with box collider
-    [SerializeField] GameObject coinPrefab;
-
-    //list of pre-instantiated coins
-    private List<GameObject> coinList;
     private void Start()
     {
-        playerCoinsTextObject.text = playerCoinsAmount.ToString();
-        ReloadCoins();
+        playerCoinsTextObject.text = playerCoinsAmountDefault.ToString();
+        playerCurrentCoinsAmount = playerCoinsAmountDefault;
     }
 
-    //public method to remove coin from player, enable coin and reload amount of coins to 30 if player have 0 coins
     public void RemoveCoinFromPlayer()
     {
-        if (playerCoinsAmount == 0)
+        if (playerCurrentCoinsAmount == 0)
         {
-            playerCoinsAmount = 30;
-            ReloadCoins();
+            playerCurrentCoinsAmount = playerCoinsAmountDefault;
             RemoveAndActivateCoins();
         }
         else
@@ -38,26 +26,17 @@ public class PlayerCoins : MonoBehaviour
         }
     }
 
-    //this method will reload the list of coins 
-    private void ReloadCoins()
-    {
-        coinList = new List<GameObject>();
-        GameObject tempCoin;
-        for (int i = 0; i < playerCoinsAmount; i++)
-        {
-            tempCoin = Instantiate(coinPrefab, spawnPointGameObject.transform.position, spawnPointGameObject.transform.rotation);
-            tempCoin.SetActive(false);
-            coinList.Add(tempCoin);
-        }
-
-    }
-
-    //count player coins 
     private void RemoveAndActivateCoins()
     {
-        playerCoinsAmount--;
-        playerCoinsTextObject.text = playerCoinsAmount.ToString();
-        coinList[0].SetActive(true);
-        coinList.Remove(coinList[0]);
+        playerCurrentCoinsAmount--;
+        playerCoinsTextObject.text = playerCurrentCoinsAmount.ToString();
+        GameObject coin = CoinsPool.instance.GetCoinFromPool();
+        GameObject coinSpawnPoint = CoinsPool.instance.spawnPointGameObject;
+        if (coin != null)
+        {
+            coin.transform.position = coinSpawnPoint.transform.position;
+            coin.transform.rotation = coinSpawnPoint.transform.rotation;
+            coin.SetActive(true);
+        }
     }
 }

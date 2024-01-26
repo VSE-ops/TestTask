@@ -712,6 +712,7 @@ GameObject:
   - component: {fileID: 893119472}
   - component: {fileID: 893119471}
   - component: {fileID: 893119470}
+  - component: {fileID: 893119473}
   m_Layer: 0
   m_Name: CoinsManager
   m_TagString: Untagged
@@ -731,11 +732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6b43e9e55d6b24abb5e98e0fc5bb0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCoinsAmount: 30
+  playerCoinsAmountDefault: 30
   playerCoinsTextObject: {fileID: 1973884539}
-  spawnPointGameObject: {fileID: 2019702765}
-  coinPrefab: {fileID: 550265422109597730, guid: 9c7afe32803253e4cad79925f6199b47, type: 3}
-  coinsToCleanup: []
 --- !u!114 &893119471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -765,6 +763,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &893119473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893119469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ec225b72a84564691c699df19b2efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsAmountInPool: 0
+  coinsInPool: []
+  coinPrefab: {fileID: 550265422109597730, guid: 9c7afe32803253e4cad79925f6199b47, type: 3}
+  spawnPointGameObject: {fileID: 2019702765}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,7 +1183,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8781950163329836899, guid: 9c6e5dc806f6e704e8ec8b2a64af8567, type: 3}
 --- !u!1 &1792619793
@@ -1428,7 +1442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9c6e5dc806f6e704e8ec8b2a64af8567, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9c6e5dc806f6e704e8ec8b2a64af8567, type: 3}
       propertyPath: m_LocalPosition.x
